@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Form Methods Demo</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    input, select { margin: 5px; padding: 5px; }
+    #output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+
+<h2>Registration Form</h2>
+<form id="myForm">
+  <label>Name: <input type="text" id="name" name="name"></label><br>
+  <label>Email: <input type="email" id="email" name="email"></label><br>
+  <label>Gender: 
+    <select id="gender" name="gender">
+      <option value="">Select</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+  </label><br>
+  <label><input type="checkbox" id="subscribe" name="subscribe"> Subscribe to newsletter</label><br>
+  <button type="submit">Submit</button>
+</form>
+
+<div id="output">Form output will appear here...</div>
+
+<script>
+$(document).ready(function(){
+
+  // 🔹 1. Focus & Blur event
+  $("#name").focus(function(){
+    $(this).css("background-color", "#e0f7fa");
+  }).blur(function(){
+    $(this).css("background-color", "");
+  });
+
+  // 🔹 2. Change event on select
+  $("#gender").change(function(){
+    $("#output").html("Gender selected: " + $(this).val());
+  });
+
+  // 🔹 3. Checkbox value detect
+  $("#subscribe").change(function(){
+    if($(this).is(":checked")){
+      $("#output").html("You subscribed to the newsletter ✅");
+    } else {
+      $("#output").html("You unsubscribed ❌");
+    }
+  });
+
+  // 🔹 4. Form Submit + Serialize
+  $("#myForm").submit(function(e){
+    e.preventDefault(); // prevent page reload
+    let formData = $(this).serialize(); // all form data in string
+    $("#output").html("Form submitted with data: <br>" + formData);
+  });
+
+});
+</script>
+
+</body>
+</html>

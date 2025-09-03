@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery AJAX Demo</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    button { margin: 5px; padding: 10px 15px; cursor: pointer; }
+    #output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+
+<h2>jQuery AJAX Examples</h2>
+
+<!-- Buttons -->
+<button id="loadData">Load Data (GET)</button>
+<button id="sendData">Send Data (POST)</button>
+<button id="ajaxCall">Custom $.ajax()</button>
+
+<div id="output">Response will appear here...</div>
+
+<script>
+$(document).ready(function(){
+
+  // 🔹 1. GET request using $.get()
+  $("#loadData").click(function(){
+    $.get("https://jsonplaceholder.typicode.com/posts/1", function(data){
+      $("#output").html("<b>GET Response:</b><br>" + JSON.stringify(data, null, 2));
+    });
+  });
+
+  // 🔹 2. POST request using $.post()
+  $("#sendData").click(function(){
+    $.post("https://jsonplaceholder.typicode.com/posts", 
+      {
+        title: "Hello jQuery AJAX",
+        body: "This is a sample post request",
+        userId: 1
+      },
+      function(data){
+        $("#output").html("<b>POST Response:</b><br>" + JSON.stringify(data, null, 2));
+      }
+    );
+  });
+
+  // 🔹 3. Full AJAX control using $.ajax()
+//   $("#ajaxCall").click(function(){
+//     $.ajax({
+//       url: "https://jsonplaceholder.typicode.com/users/1",
+//       type: "GET",  
+//       dataType: "json",
+//       beforeSend: function(){
+//         $("#output").html("Loading...");
+//       },
+//       success: function(data){
+//         $("#output").html("<b>AJAX Response:</b><br>" + JSON.stringify(data, null, 2));
+//       },
+//       error: function(xhr, status, error){
+//         $("#output").html("Error: " + error);
+//       }
+//     });
+//   });
+
+});
+</script>
+
+</body>
+</html>
