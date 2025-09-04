@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Moderate jQuery Practice</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .highlight { background: yellow; }
+    .hidden { display: none; }
+    #hoverBox { width:150px; height:150px; background:tomato; margin:10px; }
+    #gallery img { width:100px; margin:5px; cursor:pointer; }
+    #bigImg { width:300px; display:block; margin:10px 0; }
+    #sortableList li { padding:5px; border:1px solid #ccc; margin:3px 0; cursor:move; }
+    #msg { padding:10px; margin:10px 0; border:1px solid green; background:#eaffea; display:none; }
+  </style>
+</head>
+<body>
+
+<h1>Moderate jQuery Practice</h1>
+
+<!-- 1. Event Delegation -->
+<h2>1. Event Delegation</h2>
+<ul id="taskList">
+  <li>Learn jQuery</li>
+  <li>Practice CSS</li>
+</ul>
+<input type="text" id="newTask" placeholder="New Task">
+<button id="addTask">Add Task</button>
+
+<!-- 2. Hover Effect -->
+<h2>2. Hover Effect</h2>
+<div id="hoverBox"></div>
+<p id="hoverText">Hover the box to see effect</p>
+
+<!-- 3. Accordion -->
+<h2>3. Accordion</h2>
+<div class="accordion">
+  <h3>Section 1</h3>
+  <div class="panel">Content for section 1</div>
+  <h3>Section 2</h3>
+  <div class="panel">Content for section 2</div>
+  <h3>Section 3</h3>
+  <div class="panel">Content for section 3</div>
+</div>
+
+<!-- 4. Image Gallery -->
+<h2>4. Simple Image Gallery</h2>
+<div id="gallery">
+  <img src="image.png" alt="1">
+  <img src="image.png" alt="2">
+  <img src="image.png" alt="3">
+</div>
+<img id="bigImg" src="image.png">
+
+<!-- 5. Fade Message -->
+<h2>5. Auto Fade Message</h2>
+<div id="msg">This is a success message!</div>
+<button id="showMsg">Show Message</button>
+
+<!-- 6. Simple Tabs -->
+<h2>6. Simple Tabs</h2>
+<ul id="tabs">
+  <li><a href="#tab1">Tab 1</a></li>
+  <li><a href="#tab2">Tab 2</a></li>
+</ul>
+<div id="tab1" class="tabContent">This is tab 1 content</div>
+<div id="tab2" class="tabContent hidden">This is tab 2 content</div>
+
+<!-- 7. Form Validation -->
+<h2>7. Form Validation</h2>
+<form id="myForm">
+  <input type="text" id="username" placeholder="Username"><br><br>
+  <input type="email" id="email" placeholder="Email"><br><br>
+  <button type="submit">Submit</button>
+</form>
+<p id="formMsg"></p>
+
+<script>
+$(document).ready(function(){
+
+  // 1. Event Delegation (add task dynamically)
+  $("#addTask").click(function(){
+    const task = $("#newTask").val();
+    if(task){
+      $("#taskList").append("<li>"+task+"</li>");
+      $("#newTask").val("");
+    }
+  });
+  $("#taskList").on("click","li",function(){
+    $(this).toggleClass("highlight");
+  });
+
+  // 2. Hover Effect
+  $("#hoverBox").hover(function(){
+    $(this).css("background","green");
+    $("#hoverText").text("Mouse is inside!");
+  }, function(){
+    $(this).css("background","tomato");
+    $("#hoverText").text("Mouse left the box!");
+  });
+
+  // 3. Accordion
+  $(".accordion h3").click(function(){
+    $(this).next(".panel").slideToggle()
+           .siblings(".panel").slideUp();
+  });
+
+  // 4. Image Gallery
+  $("#gallery img").click(function(){
+    let src = $(this).attr("src").replace("100","300");
+    $("#bigImg").attr("src", src);
+  });
+
+  // 5. Fade Message
+  $("#showMsg").click(function(){
+    $("#msg").fadeIn().delay(2000).fadeOut();
+  });
+
+  // 6. Tabs
+  $("#tabs a").click(function(e){
+    e.preventDefault();
+    $(".tabContent").hide();
+    $($(this).attr("href")).show();
+  });
+
+  // 7. Form Validation
+  $("#myForm").submit(function(e){
+    e.preventDefault();
+    let name = $("#username").val();
+    let email = $("#email").val();
+    if(name === "" || email === ""){
+      $("#formMsg").text("All fields are required!").css("color","red");
+    } else {
+      $("#formMsg").text("Form submitted successfully!").css("color","green");
+    }
+  });
+
+});
+</script>
+</body>
+</html>

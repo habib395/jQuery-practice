@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Final jQuery Practice File</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .highlight { background: yellow; }
+    .hidden { display: none; }
+    #hoverBox { width:150px; height:150px; background:tomato; margin:10px; }
+    #gallery img { width:100px; margin:5px; cursor:pointer; }
+    #bigImg { width:300px; display:block; margin:10px 0; }
+    #sortableList li { padding:5px; border:1px solid #ccc; margin:3px 0; cursor:move; }
+    #msg { padding:10px; margin:10px 0; border:1px solid green; background:#eaffea; display:none; }
+    #dragBox { width:100px; height:100px; background:blue; color:white; text-align:center; line-height:100px; margin:10px; cursor:move; }
+    #dropArea { width:200px; height:200px; border:2px dashed gray; margin:10px; text-align:center; line-height:200px; }
+  </style>
+</head>
+<body>
+
+<h1>jQuery Practice</h1>
+
+<!-- 1. Traversing -->
+<h2>1. Traversing</h2>
+<div id="parent">
+  Parent
+  <div id="child">Child</div>
+  <div class="sibling">Sibling</div>
+</div>
+<button id="travBtn">Highlight Parent & Sibling</button>
+
+<!-- 2. Event Delegation -->
+<h2>2. Event Delegation</h2>
+<ul id="taskList">
+  <li>Learn jQuery</li>
+  <li>Practice CSS</li>
+</ul>
+<input type="text" id="newTask" placeholder="New Task">
+<button id="addTask">Add Task</button>
+
+<!-- 3. Hover Effect -->
+<h2>3. Hover Effect</h2>
+<div id="hoverBox"></div>
+<p id="hoverText">Hover the box to see effect</p>
+
+<!-- 4. Accordion -->
+<h2>4. Accordion</h2>
+<div class="accordion">
+  <h3>Section 1</h3>
+  <div class="panel">Content for section 1</div>
+  <h3>Section 2</h3>
+  <div class="panel">Content for section 2</div>
+  <h3>Section 3</h3>
+  <div class="panel">Content for section 3</div>
+</div>
+
+<!-- 5. Fade Message -->
+<h2>6. Auto Fade Message</h2>
+<div id="msg">This is a success message!</div>
+<button id="showMsg">Show Message</button>
+
+<!-- 6. Simple Tabs -->
+<h2>7. Simple Tabs</h2>
+<ul id="tabs">
+  <li><a href="#tab1">Tab 1</a></li>
+  <li><a href="#tab2">Tab 2</a></li>
+</ul>
+<div id="tab1" class="tabContent">This is tab 1 content</div>
+<div id="tab2" class="tabContent hidden">This is tab 2 content</div>
+
+<!-- 7. Animate + Chaining -->
+<h2>8. Animate + Chaining</h2>
+<div id="animBox" style="width:100px;height:100px;background:purple;"></div>
+<button id="animBtn">Animate</button>
+
+<!-- 8. Form Validation -->
+<h2>9. Form Validation</h2>
+<form id="myForm">
+  <input type="text" id="username" placeholder="Username"><br><br>
+  <input type="email" id="email" placeholder="Email"><br><br>
+  <input type="text" id="datepicker" placeholder="Pick a date"><br><br>
+  <button type="submit">Submit</button>
+</form>
+<p id="formMsg"></p>
+
+<!-- 9. AJAX -->
+<h2>10. AJAX</h2>
+<button id="loadData">Load Data (text file)</button>
+<div id="result"></div>
+
+<!-- 10. jQuery UI: Sortable -->
+<h2>11. Sortable List</h2>
+<ul id="sortableList">
+  <li>Item A</li>
+  <li>Item B</li>
+  <li>Item C</li>
+</ul>
+
+<!-- 11. jQuery UI: Draggable & Droppable -->
+<h2>12. Drag & Drop</h2>
+<div id="dragBox">Drag me</div>
+<div id="dropArea">Drop here</div>
+
+<!-- 12. LocalStorage -->
+<h2>13. LocalStorage Example</h2>
+<input type="text" id="storeInput" placeholder="Enter text">
+<button id="saveBtn">Save</button>
+<button id="loadBtn">Load</button>
+<p id="storedData"></p>
+
+<script>
+$(document).ready(function(){
+
+  // 13. Traversing
+  $("#travBtn").click(function(){
+    $("#child").parent().css("border","2px solid red");
+    $("#child").siblings().css("background","lightblue");
+  });
+
+  // 14. Hover Effect
+  $("#hoverBox").hover(function(){
+    $(this).css("background","green");
+    $("#hoverText").text("Mouse is inside!");
+  }, function(){
+    $(this).css("background","tomato");
+    $("#hoverText").text("Mouse left the box!");
+  });
+
+  // 15. Gallery
+  $("#gallery img").click(function(){
+    let src = $(this).attr("src").replace("100","300");
+    $("#bigImg").attr("src", src);
+  });
+
+
+
+  // 16. Tabs
+  $("#tabs a").click(function(e){
+    e.preventDefault();
+    $(".tabContent").hide();
+    $($(this).attr("href")).show();
+  });
+
+  // 17. Animate + Chaining
+  $("#animBtn").click(function(){
+    $("#animBox").animate({width:"200px"},1000)
+                 .animate({height:"200px"},1000)
+                 .fadeOut(1000)
+                 .fadeIn(1000);
+  });
+
+  // 18. Form Validation
+  $("#datepicker").datepicker();
+  $("#myForm").submit(function(e){
+    e.preventDefault();
+    let name = $("#username").val();
+    let email = $("#email").val();
+    if(name === "" || email === ""){
+      $("#formMsg").text("All fields are required!").css("color","red");
+    } else {
+      $("#formMsg").text("Form submitted successfully!").css("color","green");
+    }
+  });
+
+  // 19. Sortable
+  $("#sortableList").sortable();
+
+  // 20. Drag & Drop
+  $("#dragBox").draggable();
+  $("#dropArea").droppable({
+    drop: function(event, ui){
+      $(this).css("background","lightgreen").text("Dropped!");
+    }
+  });
+
+  // 21. LocalStorage
+  $("#saveBtn").click(function(){
+    let text = $("#storeInput").val();
+    localStorage.setItem("myData", text);
+    alert("Data saved!");
+  });
+  $("#loadBtn").click(function(){
+    let saved = localStorage.getItem("myData");
+    $("#storedData").text("Saved: " + saved);
+  });
+
+});
+</script>
+</body>
+</html>

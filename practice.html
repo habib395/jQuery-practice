@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery Practice File</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .highlight { background: yellow; }
+    #box { width:100px; height:100px; background:blue; position:relative; margin:10px 0; }
+    #chain { margin:10px; padding:10px; background:lightgray; }
+    #panel { background:lightgreen; padding:10px; display:block; }
+  </style>
+</head>
+<body>
+
+  <h1>jQuery Fundamentals Practice</h1>
+
+  <!-- Selector Example -->
+  <h2>1. Selectors</h2>
+  <p class="myClass">Paragraph with class</p>
+  <p id="myId">Paragraph with id</p>
+  <button id="selBtn">Change Style</button>
+
+  <!-- Traversing -->
+  <h2>2. Traversing</h2>
+  <div id="parent">
+    Parent
+    <div id="child">Child</div>
+  </div>
+  <button id="travBtn">Highlight Parent</button>
+
+  <!-- Add/Remove -->
+  <h2>3. Add/Remove Elements</h2>
+  <ul id="list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+  </ul>
+  <button id="addBtn">Add Item</button>
+  <button id="removeBtn">Remove Last Item</button>
+
+  <!-- Class Manipulation -->
+  <h2>4. Add/Remove Class</h2>
+  <div id="boxClass">This is a box</div>
+  <button id="addClassBtn">Add Class</button>
+  <button id="removeClassBtn">Remove Class</button>
+  <button id="toggleClassBtn">Toggle Class</button>
+
+  <!-- Attribute -->
+  <h2>5. Attributes</h2>
+  <img src="image.png" alt="Sample" id="myImg" style="height:200px; width:200px;">
+  <button id="getAttrBtn">Get SRC</button>
+  <button id="setAttrBtn">Set ALT</button>
+
+  <!-- Each Loop -->
+  <h2>6. Each Loop</h2>
+  <ul>
+    <li>Apple</li>
+    <li>Mango</li>
+    <li>Banana</li>
+  </ul>
+  <button id="loopBtn">Log Items</button>
+
+  <!-- Animate -->
+  <h2>7. Animate</h2>
+  <div id="box"></div>
+  <button id="animateBtn">Animate</button>
+  <button id="stopBtn">Stop</button>
+
+  <!-- Chaining -->
+  <h2>8. Chaining</h2>
+  <div id="chain">Chain me!</div>
+  <button id="chainBtn">Do Chain</button>
+
+  <!-- Data -->
+  <h2>9. Data</h2>
+  <p id="user">Rahim</p>
+  <button id="dataBtn">Store & Get Data</button>
+
+  <!-- AJAX -->
+  <h2>10. AJAX (Load Local Text)</h2>
+  <button id="loadData">Load Data</button>
+  <div id="result"></div>
+
+<script>
+$(document).ready(function(){
+
+  // Selectors
+  $("#selBtn").click(function(){
+    $("p").css("color","blue");
+    $(".myClass").css("font-weight","bold");
+    $("#myId").css("background","lightyellow");
+  });
+
+  // Traversing
+  $("#travBtn").click(function(){
+    $("#child").parent().css("border","2px solid red");
+  });
+
+  // Add/Remove
+  $("#addBtn").click(function(){
+    $("#list").append("<li>New Item</li>");
+  });
+  $("#removeBtn").click(function(){
+    $("#list li:last").remove();
+  });
+
+  // Class Manipulation
+  $("#addClassBtn").click(function(){
+    $("#boxClass").addClass("highlight");
+  });
+  $("#removeClassBtn").click(function(){
+    $("#boxClass").removeClass("highlight");
+  });
+  $("#toggleClassBtn").click(function(){
+    $("#boxClass").toggleClass("highlight");
+  });
+
+  // Attributes
+  $("#getAttrBtn").click(function(){
+    alert("Image SRC: " + $("#myImg").attr("src"));
+  });
+  $("#setAttrBtn").click(function(){
+    $("#myImg").attr("alt","New Alt Text");
+    alert("Alt set successfully!");
+  });
+
+  // Each Loop
+  $("#loopBtn").click(function(){
+    $("li").each(function(index){
+      console.log("Item " + index + ": " + $(this).text());
+    });
+  });
+
+  // Animate
+  $("#animateBtn").click(function(){
+    $("#box").animate({
+      left:'200px',
+      opacity:0.5,
+      height:'150px',
+      width:'150px'
+    },2000);
+  });
+  $("#stopBtn").click(function(){
+    $("#box").stop();
+  });
+
+  // Chaining
+  $("#chainBtn").click(function(){
+    $("#chain").css("color","red")
+               .slideUp(1000)
+               .slideDown(1000);
+  });
+
+  // Data
+  $("#dataBtn").click(function(){
+    $("#user").data("age",25);
+    alert("User age: " + $("#user").data("age"));
+  });
+
+  // AJAX
+  $("#loadData").click(function(){
+    $("#result").load("data.txt"); 
+  });
+
+});
+</script>
+</body>
+</html>
