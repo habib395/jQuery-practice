@@ -256,7 +256,13 @@ $(document).ready(function(){
   });
   
   // 6. Tabs
-  $("#tabs").tabs();
+
+  $("#tabs a").click(function(e){
+    e.preventDefault();
+    $(".tabContent").hide();
+    $($(this).attr("href")).show();
+  });
+
 
   // 7. Animate + Chaining
   $("#animBtn").click(function(){

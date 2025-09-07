@@ -43,6 +43,7 @@
 <button id="childrenBtn">Highlight Children of #section2</button>
 <button id="findBtn">Find All .child inside #mainContainer</button>
 <button id="siblingsBtn">Highlight Siblings of .child</button>
+<button id="parentToChildBtn">Highlight .child of #section1 (Parent → Child)</button>
 
 <!-- Output -->
 <p id="output" style="font-weight: bold; color: green;"></p>
@@ -103,6 +104,13 @@ $(document).ready(function(){
     resetStyles();
     $(".child").siblings().addClass("highlight");
     $("#output").text("Highlighted siblings of each .child.");
+  });
+
+  // 🔹 8. Parent থেকে Child Selector
+  $("#parentToChildBtn").click(function() {
+    resetStyles();
+    $("#section1").children(".child").addClass("highlight"); 
+    $("#output").text("Highlighted all .child elements inside #section1 (Parent → Child).");
   });
 
 });

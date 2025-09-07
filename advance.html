@@ -113,13 +113,13 @@
 <script>
 $(document).ready(function(){
 
-  // 13. Traversing
+  // 1. Traversing
   $("#travBtn").click(function(){
     $("#child").parent().css("border","2px solid red");
     $("#child").siblings().css("background","lightblue");
   });
 
-  // 14. Hover Effect
+  // 2. Hover Effect
   $("#hoverBox").hover(function(){
     $(this).css("background","green");
     $("#hoverText").text("Mouse is inside!");
@@ -128,7 +128,7 @@ $(document).ready(function(){
     $("#hoverText").text("Mouse left the box!");
   });
 
-  // 15. Gallery
+  // 3. Gallery
   $("#gallery img").click(function(){
     let src = $(this).attr("src").replace("100","300");
     $("#bigImg").attr("src", src);
@@ -136,14 +136,14 @@ $(document).ready(function(){
 
 
 
-  // 16. Tabs
+  // 4. Tabs
   $("#tabs a").click(function(e){
     e.preventDefault();
     $(".tabContent").hide();
     $($(this).attr("href")).show();
   });
 
-  // 17. Animate + Chaining
+  // 5. Animate + Chaining
   $("#animBtn").click(function(){
     $("#animBox").animate({width:"200px"},1000)
                  .animate({height:"200px"},1000)
@@ -151,7 +151,7 @@ $(document).ready(function(){
                  .fadeIn(1000);
   });
 
-  // 18. Form Validation
+  // 6. Form Validation
   $("#datepicker").datepicker();
   $("#myForm").submit(function(e){
     e.preventDefault();
@@ -164,10 +164,10 @@ $(document).ready(function(){
     }
   });
 
-  // 19. Sortable
+  // 7. Sortable
   $("#sortableList").sortable();
 
-  // 20. Drag & Drop
+  // 8. Drag & Drop
   $("#dragBox").draggable();
   $("#dropArea").droppable({
     drop: function(event, ui){
@@ -175,7 +175,7 @@ $(document).ready(function(){
     }
   });
 
-  // 21. LocalStorage
+  // 8. LocalStorage
   $("#saveBtn").click(function(){
     let text = $("#storeInput").val();
     localStorage.setItem("myData", text);
