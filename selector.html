@@ -22,15 +22,15 @@
 <!-- HTML Structure -->
 <div id="mainContainer" class="box">
   Main Container
-  <div id="section1" class="box">
+  <div id="section1" class="box example-p">
     Section 1
-    <div class="child">Child 1.1</div>
-    <div class="child">Child 1.2</div>
+    <div class="child example">Child 1.1</div>
+    <div class="child example">Child 1.2</div>
   </div>
-  <div id="section2" class="box">
+  <div id="section2" class="box example-p">
     Section 2
-    <div class="child">Child 2.1</div>
-    <div class="child">Child 2.2</div>
+    <div class="child example">Child 2.1</div>
+    <div class="child example">Child 2.2</div>
   </div>
 </div>
 
@@ -44,6 +44,7 @@
 <button id="findBtn">Find All .child inside #mainContainer</button>
 <button id="siblingsBtn">Highlight Siblings of .child</button>
 <button id="parentToChildBtn">Highlight .child of #section1 (Parent → Child)</button>
+<button id="parentsFindBtn">Highlight .example via parents().find()</button>
 
 <!-- Output -->
 <p id="output" style="font-weight: bold; color: green;"></p>
@@ -106,11 +107,18 @@ $(document).ready(function(){
     $("#output").text("Highlighted siblings of each .child.");
   });
 
-  // 🔹 8. Parent থেকে Child Selector
+  // 🔹 8. Parent → Child Selector
   $("#parentToChildBtn").click(function() {
     resetStyles();
     $("#section1").children(".child").addClass("highlight"); 
     $("#output").text("Highlighted all .child elements inside #section1 (Parent → Child).");
+  });
+
+  // 🔹 9. .parents().find() Example
+  $("#parentsFindBtn").click(function() {
+    resetStyles();
+    $(".example").parents(".example-p").find(".example").addClass("highlight"); 
+    $("#output").text("Selected using .parents('.example-p').find('.example').");
   });
 
 });
