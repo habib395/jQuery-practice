@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Parent, Child, and ID Selectors</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .box, .child {
+      padding: 10px;
+      border: 1px solid #333;
+      margin: 5px;
+    }
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+
+<h1>jQuery Parent, Child, and ID Selectors Practice</h1>
+
+<!-- HTML Structure -->
+<div id="mainContainer" class="box">
+  Main Container
+  <div id="section1" class="box">
+    Section 1
+    <div class="child">Child 1.1</div>
+    <div class="child">Child 1.2</div>
+  </div>
+  <div id="section2" class="box">
+    Section 2
+    <div class="child">Child 2.1</div>
+    <div class="child">Child 2.2</div>
+  </div>
+</div>
+
+<!-- Buttons -->
+<h2>Selectors</h2>
+<button id="idSelectorBtn">Highlight #section1 by ID</button>
+<button id="parentBtn">Highlight Parent of .child</button>
+<button id="parentsBtn">Highlight All Parents of .child</button>
+<button id="closestBtn">Closest .box to .child</button>
+<button id="childrenBtn">Highlight Children of #section2</button>
+<button id="findBtn">Find All .child inside #mainContainer</button>
+<button id="siblingsBtn">Highlight Siblings of .child</button>
+
+<!-- Output -->
+<p id="output" style="font-weight: bold; color: green;"></p>
+
+<script>
+$(document).ready(function(){
+
+  // Reset all styles before any operation
+  function resetStyles() {
+    $(".box, .child").removeClass("highlight");
+    $("#output").text('');
+  }
+
+  // 1. ID Selector
+  $("#idSelectorBtn").click(function() {
+    resetStyles();
+    $("#section1").addClass("highlight");
+    $("#output").text("Selected #section1 by ID.");
+  });
+
+  // 2. .parent() - Select immediate parent
+  $("#parentBtn").click(function() {
+    resetStyles();
+    $(".child").parent().addClass("highlight");
+    $("#output").text("Highlighted parent of each .child.");
+  });
+
+  // 3. .parents() - Select all ancestors
+  $("#parentsBtn").click(function() {
+    resetStyles();
+    $(".child").parents().addClass("highlight");
+    $("#output").text("Highlighted all parents of .child.");
+  });
+
+  // 4. .closest() - Select nearest ancestor that matches selector
+  $("#closestBtn").click(function() {
+    resetStyles();
+    $(".child").closest(".box").addClass("highlight");
+    $("#output").text("Highlighted closest '.box' to each .child.");
+  });
+
+  // 5. .children() - Select direct children
+  $("#childrenBtn").click(function() {
+    resetStyles();
+    $("#section2").children().addClass("highlight");
+    $("#output").text("Highlighted direct children of #section2.");
+  });
+
+  // 6. .find() - Find all descendants matching selector
+  $("#findBtn").click(function() {
+    resetStyles();
+    $("#mainContainer").find(".child").addClass("highlight");
+    $("#output").text("Found and highlighted all .child inside #mainContainer.");
+  });
+
+  // 7. .siblings() - Highlight siblings of .child
+  $("#siblingsBtn").click(function() {
+    resetStyles();
+    $(".child").siblings().addClass("highlight");
+    $("#output").text("Highlighted siblings of each .child.");
+  });
+
+});
+</script>
+
+</body>
+</html>

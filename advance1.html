@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Final jQuery Practice File - All Topics</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .highlight { background: yellow; }
+    .hidden { display: none; }
+    #hoverBox { width:150px; height:150px; background:tomato; margin:10px; }
+    #gallery img { width:100px; margin:5px; cursor:pointer; }
+    #bigImg { width:300px; display:block; margin:10px 0; }
+    #sortableList li { padding:5px; border:1px solid #ccc; margin:3px 0; cursor:move; }
+    #msg { padding:10px; margin:10px 0; border:1px solid green; background:#eaffea; display:none; }
+    #dragBox { width:100px; height:100px; background:blue; color:white; text-align:center; line-height:100px; margin:10px; cursor:move; }
+    #dropArea { width:200px; height:200px; border:2px dashed gray; margin:10px; text-align:center; line-height:200px; }
+    .box { width: 100px; height: 100px; margin: 5px; background-color: gray; display: inline-block; }
+    .active-box { background-color: darkgreen; }
+    .slide-panel { padding: 10px; border: 1px solid #ccc; background-color: #f9f9f9; display: none; }
+    #json-data p { padding: 5px; border-bottom: 1px dotted #ccc; }
+    #filterList li { padding: 5px; border: 1px solid #ccc; margin: 3px 0; }
+    #customAnimBox { width:100px; height:100px; background:orange; }
+    #eventBox { width:200px; height:200px; background:lightcoral; }
+    #dataBox { width:100px; height:100px; background:cyan; }
+    .pluginBox { width:100px; height:100px; background:lightgray; margin:5px; display:inline-block; }
+  </style>
+</head>
+<body>
+
+<h1>jQuery Practice - All Topics</h1>
+
+<!-- 1. Traversing -->
+<h2>1. Traversing</h2>
+<div id="parent">
+  Parent
+  <div id="child">Child</div>
+  <div class="sibling">Sibling</div>
+</div>
+<button id="travBtn">Highlight Parent & Sibling</button>
+
+<!-- 2. Event Delegation -->
+<h2>2. Event Delegation</h2>
+<ul id="taskList">
+  <li>Learn jQuery</li>
+  <li>Practice CSS</li>
+</ul>
+<input type="text" id="newTask" placeholder="New Task">
+<button id="addTask">Add Task</button>
+
+<!-- 3. Hover Effect -->
+<h2>3. Hover Effect</h2>
+<div id="hoverBox"></div>
+<p id="hoverText">Hover the box to see effect</p>
+
+<!-- 4. Accordion -->
+<h2>4. Accordion</h2>
+<div class="accordion">
+  <h3>Section 1</h3>
+  <div class="panel">Content for section 1</div>
+  <h3>Section 2</h3>
+  <div class="panel">Content for section 2</div>
+  <h3>Section 3</h3>
+  <div class="panel">Content for section 3</div>
+</div>
+
+<!-- 5. Fade Message -->
+<h2>5. Auto Fade Message</h2>
+<div id="msg">This is a success message!</div>
+<button id="showMsg">Show Message</button>
+
+<!-- 6. Simple Tabs -->
+<h2>6. Simple Tabs</h2>
+<ul id="tabs">
+  <li><a href="#tab1">Tab 1</a></li>
+  <li><a href="#tab2">Tab 2</a></li>
+</ul>
+<div id="tab1" class="tabContent">This is tab 1 content</div>
+<div id="tab2" class="tabContent hidden">This is tab 2 content</div>
+
+<!-- 7. Animate + Chaining -->
+<h2>7. Animate + Chaining</h2>
+<div id="animBox" style="width:100px;height:100px;background:purple;"></div>
+<button id="animBtn">Animate</button>
+
+<!-- 8. Form Validation -->
+<h2>8. Form Validation</h2>
+<form id="myForm">
+  <input type="text" id="username" placeholder="Username"><br><br>
+  <input type="email" id="email" placeholder="Email"><br><br>
+  <input type="text" id="datepicker" placeholder="Pick a date"><br><br>
+  <button type="submit">Submit</button>
+</form>
+<p id="formMsg"></p>
+
+<!-- 9. AJAX -->
+<h2>9. AJAX</h2>
+<button id="loadData">Load Data (text file)</button>
+<div id="result"></div>
+
+<!-- 10. Sortable -->
+<h2>10. Sortable List</h2>
+<ul id="sortableList">
+  <li>Item A</li>
+  <li>Item B</li>
+  <li>Item C</li>
+</ul>
+
+<!-- 11. Drag & Drop -->
+<h2>11. Drag & Drop</h2>
+<div id="dragBox">Drag me</div>
+<div id="dropArea">Drop here</div>
+
+<!-- 12. LocalStorage -->
+<h2>12. LocalStorage Example</h2>
+<input type="text" id="storeInput" placeholder="Enter text">
+<button id="saveBtn">Save</button>
+<button id="loadBtn">Load</button>
+<p id="storedData"></p>
+
+<!-- 13. Image Gallery -->
+<h2>13. Image Gallery</h2>
+<div id="gallery">
+  <img src="https://placehold.co/100x100/A8FF78/000?text=img1" alt="Image 1">
+  <img src="https://placehold.co/100x100/FFD8BE/000?text=img2" alt="Image 2">
+  <img src="https://placehold.co/100x100/FF0000/000?text=img3" alt="Image 3">
+</div>
+<img id="bigImg" src="https://placehold.co/300x300/A8FF78/000?text=img1" alt="Large Image">
+
+<!-- 14. Class Manipulation -->
+<h2>14. Class Manipulation</h2>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<button id="toggleClassBtn">Toggle Highlight</button>
+
+<!-- 15. Slide Toggle -->
+<h2>15. Slide Toggle</h2>
+<button id="slideToggleBtn">Toggle Panel</button>
+<div id="slidePanel" class="slide-panel">This is a sliding panel. Click the button to toggle its visibility.</div>
+
+<!-- 16. AJAX with JSON -->
+<h2>16. AJAX with JSON</h2>
+<button id="loadJsonBtn">Load JSON Data</button>
+<div id="json-data"></div>
+
+<!-- 17. Filter Elements -->
+<h2>17. Filter Elements</h2>
+<ul id="filterList">
+  <li>Item 1</li>
+  <li class="special">Special Item 2</li>
+  <li>Item 3</li>
+  <li class="special">Special Item 4</li>
+</ul>
+<button id="filterBtn">Show Only Special Items</button>
+
+<!-- 18. Each Loop -->
+<h2>18. Each Loop</h2>
+<p class="each-item">Item 1</p>
+<p class="each-item">Item 2</p>
+<p class="each-item">Item 3</p>
+<button id="eachBtn">Apply Border to Each Item</button>
+
+<!-- 19. Advanced Selectors -->
+<h2>19. Advanced Selectors</h2>
+<div id="selectorTest">
+  <input type="text" name="user" value="John">
+  <input type="text" name="email" value="">
+  <p class="intro">First paragraph</p>
+  <p>Second paragraph</p>
+</div>
+<button id="selectBtn">Apply Selectors</button>
+
+<!-- 20. Event Namespaces -->
+<h2>20. Event Namespaces</h2>
+<button id="namespaceBtn">Trigger Namespaced Click</button>
+<p id="namespaceResult">Click count: 0</p>
+
+<!-- 21. Custom Animation -->
+<h2>21. Custom Animation</h2>
+<div id="customAnimBox"></div>
+<button id="customAnimBtn">Custom Animate</button>
+
+<!-- 22. Advanced AJAX -->
+<h2>22. Advanced AJAX</h2>
+<button id="ajaxPromiseBtn">Load Data with Promise</button>
+<div id="ajaxResult"></div>
+
+<!-- 23. Event Object -->
+<h2>23. Event Object</h2>
+<div id="eventBox"></div>
+<p id="eventInfo">Click or move mouse in the box</p>
+
+<!-- 24. jQuery Data Method -->
+<h2>24. jQuery Data Method</h2>
+<div id="dataBox"></div>
+<button id="setDataBtn">Set Data</button>
+<button id="getDataBtn">Get Data</button>
+<p id="dataResult"></p>
+
+<!-- 25. Chaining with .end() -->
+<h2>25. Chaining with .end()</h2>
+<ul id="chainList">
+  <li class="item">Item 1</li>
+  <li class="item special">Item 2</li>
+  <li class="item">Item 3</li>
+</ul>
+<button id="chainBtn">Chain and End</button>
+
+<!-- 26. Custom jQuery Plugin -->
+<h2>26. Custom jQuery Plugin</h2>
+<div class="pluginBox">Box 1</div>
+<div class="pluginBox">Box 2</div>
+<button id="pluginBtn">Apply Plugin Effect</button>
+
+<script>
+$(document).ready(function(){
+
+  // 1. Traversing
+  $("#travBtn").click(function(){
+    $("#child").parent().css("border","2px solid red");
+    $("#child").siblings().css("background","lightblue");
+  });
+
+  // 2. Event Delegation
+  $("#taskList").on("click", "li", function(){
+    $(this).remove();
+  });
+  $("#addTask").click(function(){
+    let newTask = $("#newTask").val();
+    if(newTask !== ""){
+      $("#taskList").append("<li>" + newTask + "</li>");
+      $("#newTask").val("");
+    }
+  });
+
+  // 3. Hover Effect
+  $("#hoverBox").hover(function(){
+    $(this).css("background","green");
+    $("#hoverText").text("Mouse is inside!");
+  }, function(){
+    $(this).css("background","tomato");
+    $("#hoverText").text("Mouse left the box!");
+  });
+
+  // 4. Accordion
+  $(".accordion").accordion({
+    collapsible: true,
+    active: false
+  });
+  
+  // 5. Fade Message
+  $("#showMsg").click(function(){
+    $("#msg").fadeIn(500).delay(2000).fadeOut(500);
+  });
+  
+  // 6. Tabs
+  $("#tabs").tabs();
+
+  // 7. Animate + Chaining
+  $("#animBtn").click(function(){
+    $("#animBox").animate({width:"200px"},1000)
+                 .animate({height:"200px"},1000)
+                 .fadeOut(1000)
+                 .fadeIn(1000);
+  });
+
+  // 8. Form Validation
+  $("#datepicker").datepicker();
+  $("#myForm").submit(function(e){
+    e.preventDefault();
+    let name = $("#username").val();
+    let email = $("#email").val();
+    if(name === "" || email === ""){
+      $("#formMsg").text("All fields are required!").css("color","red");
+    } else {
+      $("#formMsg").text("Form submitted successfully!").css("color","green");
+    }
+  });
+
+  // 9. AJAX
+  $("#loadData").click(function(){
+    $.ajax({
+      url: "data.txt",
+      type: "GET",
+      success: function(response){
+        $("#result").text("Data loaded successfully: " + response).css("color", "green");
+      },
+      error: function(){
+        $("#result").text("Error: Could not load data.txt. Make sure the file exists.").css("color", "red");
+      }
+    });
+  });
+
+  // 10. Sortable
+  $("#sortableList").sortable();
+
+  // 11. Drag & Drop
+  $("#dragBox").draggable();
+  $("#dropArea").droppable({
+    drop: function(event, ui){
+      $(this).css("background","lightgreen").text("Dropped!");
+    }
+  });
+
+  // 12. LocalStorage
+  $("#saveBtn").click(function(){
+    let text = $("#storeInput").val();
+    localStorage.setItem("myData", text);
+    $("#msg").text("Data saved successfully!").fadeIn(500).delay(2000).fadeOut(500);
+  });
+  $("#loadBtn").click(function(){
+    let saved = localStorage.getItem("myData");
+    if(saved){
+      $("#storedData").text("Saved: " + saved).css("color", "green");
+    } else {
+      $("#storedData").text("No data found!").css("color", "red");
+    }
+  });
+
+  // 13. Image Gallery
+  $("#gallery img").click(function(){
+    let src = $(this).attr("src");
+    $("#bigImg").attr("src", src.replace("100x100", "300x300"));
+  });
+
+  // 14. Class Manipulation
+  $("#toggleClassBtn").click(function() {
+    $(".box").toggleClass("active-box");
+  });
+
+  // 15. Slide Toggle
+  $("#slideToggleBtn").click(function() {
+    $("#slidePanel").slideToggle("slow");
+  });
+
+  // 16. AJAX with JSON
+  $("#loadJsonBtn").click(function() {
+    const mockJson = [
+      { "name": "Item A", "value": 10 },
+      { "name": "Item B", "value": 20 },
+      { "name": "Item C", "value": 30 }
+    ];
+    setTimeout(() => {
+      let output = "<h3>JSON Data:</h3>";
+      $.each(mockJson, function(index, item) {
+        output += `<p>Name: ${item.name}, Value: ${item.value}</p>`;
+      });
+      $("#json-data").html(output);
+    }, 1000);
+  });
+
+  // 17. Filter Elements
+  $("#filterBtn").click(function() {
+    $("#filterList li").hide();
+    $("#filterList li.special").show();
+  });
+  
+  // 18. Each Loop
+  $("#eachBtn").click(function() {
+    $(".each-item").each(function(index, element) {
+      $(element).css("border", "2px solid purple");
+    });
+  });
+
+  // 19. Advanced Selectors
+  $("#selectBtn").click(function() {
+    $(":input[value!='']").css("border", "2px solid blue");
+    $("p.intro:first").css("font-weight", "bold");
+    $("[name*='user']").css("background", "lightyellow");
+  });
+
+  // 20. Event Namespaces
+  let clickCount = 0;
+  $("#namespaceBtn").on("click.myNamespace", function() {
+    clickCount++;
+    $("#namespaceResult").text("Click count: " + clickCount);
+  });
+  setTimeout(function() {
+    $("#namespaceBtn").off("click.myNamespace");
+    $("#namespaceResult").text("Namespaced click event removed!");
+  }, 3000);
+
+  // 21. Custom Animation
+  $("#customAnimBtn").click(function() {
+    $("#customAnimBox").animate({
+      width: "200px",
+      height: "200px",
+      opacity: 0.5,
+      marginLeft: "50px"
+    }, {
+      duration: 1000,
+      easing: "swing",
+      step: function(now, fx) {
+        $(this).css("transform", "rotate(" + now + "deg)");
+      },
+      complete: function() {
+        $(this).css("background", "lightblue");
+      }
+    });
+  });
+
+  // 22. Advanced AJAX
+  $("#ajaxPromiseBtn").click(function() {
+    $.ajax({
+      url: "nonexistent.json",
+      type: "GET",
+      dataType: "json"
+    })
+    .done(function(data) {
+      $("#ajaxResult").text("Data loaded: " + JSON.stringify(data)).css("color", "green");
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      $("#ajaxResult").text("Error: " + textStatus + " - " + errorThrown).css("color", "red");
+    })
+    .always(function() {
+      $("#ajaxResult").append("<br>Request completed.");
+    });
+  });
+
+  // 23. Event Object
+  $("#eventBox").on("click mousemove", function(event) {
+    let info = `Event: ${event.type}, Position: (${event.pageX}, ${event.pageY}), Target: ${event.target.tagName}`;
+    $("#eventInfo").text(info);
+  });
+
+  // 24. jQuery Data Method
+  $("#setDataBtn").click(function() {
+    $("#dataBox").data("info", { color: "cyan", size: "100px" });
+    $("#dataResult").text("Data set successfully!").css("color", "green");
+  });
+  $("#getDataBtn").click(function() {
+    let data = $("#dataBox").data("info");
+    if (data) {
+      $("#dataResult").text(`Color: ${data.color}, Size: ${data.size}`).css("color", "blue");
+    } else {
+      $("#dataResult").text("No data found!").css("color", "red");
+    }
+  });
+
+  // 25. Chaining with .end()
+  $("#chainBtn").click(function() {
+    $("#chainList")
+      .find(".special")
+        .css("background", "yellow")
+      .end()
+      .find(".item")
+        .css("border", "1px solid black");
+  });
+
+  // 26. Custom jQuery Plugin
+  $.fn.flash = function(color, duration) {
+    return this.each(function() {
+      let $this = $(this);
+      $this.css("background", color).fadeOut(duration).fadeIn(duration);
+    });
+  };
+  $("#pluginBtn").click(function() {
+    $(".pluginBox").flash("lightgreen", 500);
+  });
+
+});
+</script>
+</body>
+</html>

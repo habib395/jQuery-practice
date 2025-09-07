@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery hasClass & attr Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .highlight {
+      background-color: yellow;
+    }
+    .important {
+      font-weight: bold;
+      color: red;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      background-color: lightblue;
+    }
+  </style>
+</head>
+<body>
+
+<h1>jQuery: hasClass(), attr(), prop() Practice</h1>
+
+<!-- Target Box -->
+<div id="myBox" class="box highlight" data-info="TestBox" title="Hover me!">Box</div>
+
+<!-- Buttons -->
+<button id="checkClass">Check if Box has class 'highlight'</button>
+<button id="checkAttr">Check 'data-info' attribute</button>
+<button id="setAttr">Set 'title' attribute</button>
+<button id="removeAttr">Remove 'title' attribute</button>
+
+<!-- Prop-related -->
+<br><br>
+<input type="checkbox" id="agreeCheckbox">
+<label for="agreeCheckbox">I agree</label>
+<br>
+<button id="checkProp">Check if checkbox is checked</button>
+<button id="setProp">Set checked</button>
+<button id="removeProp">Remove checked</button>
+
+<!-- Message -->
+<p id="output" style="color: green; font-weight: bold;"></p>
+
+<script>
+$(document).ready(function(){
+
+  // 1. Check class with hasClass()
+  $('#checkClass').click(function(){
+    if ($('#myBox').hasClass('highlight')) {
+      $('#output').text("✔️ Box has class 'highlight'");
+    } else {
+      $('#output').text("❌ Box does NOT have class 'highlight'");
+    }
+  });
+
+  // 2. Check data attribute using attr()
+  $('#checkAttr').click(function(){
+    let dataInfo = $('#myBox').attr('data-info');
+    $('#output').text("data-info = " + dataInfo);
+  });
+
+  // 3. Set attribute
+  $('#setAttr').click(function(){
+    $('#myBox').attr('title', 'This is a new title!');
+    $('#output').text("Title attribute set successfully.");
+  });
+
+  // 4. Remove attribute
+  $('#removeAttr').click(function(){
+    $('#myBox').removeAttr('title');
+    $('#output').text("Title attribute removed.");
+  });
+
+  // 5. Check property (checked)
+  $('#checkProp').click(function(){
+    if ($('#agreeCheckbox').prop('checked')) {
+      $('#output').text("✔️ Checkbox is checked.");
+    } else {
+      $('#output').text("❌ Checkbox is NOT checked.");
+    }
+  });
+
+  // 6. Set checked property
+  $('#setProp').click(function(){
+    $('#agreeCheckbox').prop('checked', true);
+    $('#output').text("Checkbox has been checked.");
+  });
+
+  // 7. Remove checked property (uncheck)
+  $('#removeProp').click(function(){
+    $('#agreeCheckbox').prop('checked', false);
+    $('#output').text("Checkbox has been unchecked.");
+  });
+
+});
+</script>
+
+</body>
+</html>
